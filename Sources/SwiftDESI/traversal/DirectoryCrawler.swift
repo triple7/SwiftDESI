@@ -55,6 +55,7 @@ public final class DirectoryCrawler {
             files: inout [DESIEndpoint]
         ) async throws {
 
+            print(endpoint)
             guard depth <= options.maxDepth else { return }
 
             let key = endpoint.url.absoluteString
