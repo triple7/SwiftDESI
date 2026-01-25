@@ -26,7 +26,7 @@ public final class DirectoryCrawler {
         case .depthFirst:
             try await dfs(
                 endpoint: root,
-                depth: 0,
+                depth: 5,
                 options: options,
                 visited: &visited,
                 files: &collectedFiles
