@@ -1,3 +1,4 @@
-final public class SwiftDESI {
-    
+import Foundation
+
+public struct SwiftDESI {
 }

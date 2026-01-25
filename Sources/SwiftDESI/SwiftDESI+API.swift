@@ -2,7 +2,7 @@
 
 extension SwiftDESI {
     
-    public func traverseDr1SpectraFits() async throws -> [DESIEndpoint] {
+    public static func traverseDr1SpectraFits() async throws -> [DESIEndpoint] {
         let crawler = DirectoryCrawler()
 
         let result = try await crawler.crawl(
