@@ -1,0 +1,33 @@
+{
+  "originHash" : "2314516eab8438e3a59e07781898e24a577cd3d5c3b4d39ee4787e58983f3eef",
+  "pins" : [
+    {
+      "identity" : "fitscore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brampf/fitscore.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "93a1f0c7056a323b9f27cb618c83f64d458edb7b"
+      }
+    },
+    {
+      "identity" : "fitskit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/brampf/fitskit.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "0e4094ed8c45d094551c519d4e36d466ea900de6"
+      }
+    },
+    {
+      "identity" : "swift-numerics",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-numerics",
+      "state" : {
+        "revision" : "6583ac70c326c3ee080c1d42d9ca3361dca816cd",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}
