@@ -17,11 +17,12 @@ public struct DirectoryListingParser {
         for line in lines {
             guard let hrefRange = line.range(of: "href=\"") else { continue }
 
+            print("href range: \(hrefRange)")
             let afterHref = line[hrefRange.upperBound...]
             guard let endQuote = afterHref.firstIndex(of: "\"") else { continue }
 
             let href = String(afterHref[..<endQuote])
-
+            print("href is: \(href)")
             // Ignore parent directory and junk
             guard href != "../", !href.isEmpty else { continue }
 
@@ -37,6 +38,7 @@ public struct DirectoryListingParser {
             )
         }
 
+        print("Found \(entries.count)")
         return entries
     }
 }
