@@ -6,7 +6,7 @@ extension SwiftDESI {
         let crawler = DirectoryCrawler()
 
         let result = try await crawler.crawl(
-            from: DESIEndpoint.spectroRedux(release: .dr1, product: .iron),
+            from: DESIEndpoint.spectroRedux(release: .dr1, product: .iron, layout: .tiles),
             options: TraversalOptions()
         )
 

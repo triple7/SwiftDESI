@@ -55,10 +55,8 @@ public final class DirectoryCrawler {
             files: inout [DESIEndpoint]
         ) async throws {
 
-            print(endpoint)
             guard depth <= options.maxDepth else { return }
 
-            print("depts: \(depth)")
             let key = endpoint.url.absoluteString
             guard !visited.contains(key) else { return }
             visited.insert(key)

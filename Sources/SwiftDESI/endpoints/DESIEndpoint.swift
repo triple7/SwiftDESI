@@ -19,13 +19,15 @@ public struct DESIEndpoint: Codable, Identifiable {
     // MARK: - Base builders
     public static func spectroRedux(
         release: DESIRelease,
-        product: DESISpectroProduct
+        product: DESISpectroProduct,
+        layout: DESISpectroLayout
     ) -> DESIEndpoint {
         DESIEndpoint(
             release.baseURL
                 .appendingPathComponent("spectro")
                 .appendingPathComponent("redux")
                 .appendingPathComponent(product.rawValue)
+                .appendingPathComponent(layout.rawValue)
         )
     }
 

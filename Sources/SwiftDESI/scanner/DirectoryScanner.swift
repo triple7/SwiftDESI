@@ -17,7 +17,6 @@ public struct DirectoryScanner {
     public func scan(endpoint: DESIEndpoint) async throws -> DirectoryScanResult {
 
         let html = try await fetcher.fetchHTML(from: endpoint.url)
-        print(html)
         let entries = DirectoryListingParser.parse(html: html)
 
         var directories: [DESIEndpoint] = []
