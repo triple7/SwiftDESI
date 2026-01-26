@@ -8,26 +8,31 @@
 import Foundation
 
 public struct DirectoryListingParser {
-
+    
     public static func parse(html: String) -> [DirectoryEntry] {
         var entries: [DirectoryEntry] = []
 
-        let lines = html.split(separator: "\n")
+        let hrefToken = "href=\""
+        var searchRange = html.startIndex..<html.endIndex
 
-        for line in lines {
-            guard let hrefRange = line.range(of: "href=\"") else { continue }
+        while let hrefRange = html.range(of: hrefToken, range: searchRange) {
+            let afterHrefStart = hrefRange.upperBound
 
-            print("href range: \(hrefRange)")
-            let afterHref = line[hrefRange.upperBound...]
-            guard let endQuote = afterHref.firstIndex(of: "\"") else { continue }
+            guard let endQuote = html[afterHrefStart...].firstIndex(of: "\"") else {
+                break
+            }
 
-            let href = String(afterHref[..<endQuote])
-            print("href is: \(href)")
-            // Ignore parent directory and junk
-            guard href != "../", !href.isEmpty else { continue }
+            let href = String(html[afterHrefStart..<endQuote])
+
+            // Advance search range
+            searchRange = endQuote..<html.endIndex
+
+            // Ignore parent directory and empty links
+            guard href != "../", !href.isEmpty else {
+                continue
+            }
 
             let isDirectory = href.hasSuffix("/")
-
             let name = href.trimmingCharacters(in: CharacterSet(charactersIn: "/"))
 
             entries.append(
@@ -41,4 +46,5 @@ public struct DirectoryListingParser {
         print("Found \(entries.count)")
         return entries
     }
+
 }
