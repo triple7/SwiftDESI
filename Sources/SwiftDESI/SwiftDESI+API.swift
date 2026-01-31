@@ -5,13 +5,29 @@ extension SwiftDESI {
     public static func traverseDr1RelevantCatalogs() async throws -> [DESIEndpoint] {
         let crawler = DirectoryCrawler()
 
+        let options = TraversalOptions { endpoint in
+            let path = endpoint.url.path.lowercased()
+
+            // Allow cumulative tiles
+            if path.contains("/tiles/cumulative") {
+                return true
+            }
+
+            // Explicitly block pernight
+            if path.contains("/tiles/pernight") {
+                return false
+            }
+
+            return true
+        }
+
         let result = try await crawler.crawl(
             from: DESIEndpoint.spectroRedux(
                 release: .dr1,
                 product: .iron,
                 layout: .tiles
             ),
-            options: TraversalOptions()
+            options: options
         )
 
         let relevantFiles = result.files.filter { endpoint in
