@@ -1,6 +1,7 @@
 
 
 extension SwiftDESI {
+
     
     public static func traverseDr1RelevantCatalogs() async throws -> [DESIEndpoint] {
         let crawler = DirectoryCrawler()
@@ -60,6 +61,14 @@ extension SwiftDESI {
     }
 
     public static func traverseDr1ZCatalogs() async throws -> [DESIEndpoint] {
+        func isPrimaryZCatalog(_ endpoint: DESIEndpoint) -> Bool {
+            let name = endpoint.url.lastPathComponent.lowercased()
+
+            return
+                name == "zall-pix-iron.fits" ||
+                name == "zall-tilecumulative-iron.fits"
+        }
+
         let crawler = DirectoryCrawler()
 
         // zcatalog lives under spectro/redux/<prod>/zcatalog
@@ -97,7 +106,7 @@ extension SwiftDESI {
                 (base.hasPrefix("zmtl") && base.hasSuffix(".fits"))   // optional
         }
 
-        return zcatalogFiles
+        return zcatalogFiles.filter{isPrimaryZCatalog($0)}
     }
 
 
