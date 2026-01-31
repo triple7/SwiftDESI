@@ -73,6 +73,7 @@ extension SwiftDESI {
             )
             .zCatalog()
 
+        print("Trying: \(zcatalogRoot)")
         let result = try await crawler.crawl(
             from: zcatalogRoot,
             options: TraversalOptions(
