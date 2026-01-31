@@ -59,4 +59,44 @@ extension SwiftDESI {
         return relevantFiles
     }
 
+    public static func traverseDr1ZCatalogs() async throws -> [DESIEndpoint] {
+        let crawler = DirectoryCrawler()
+
+        // zcatalog lives under spectro/redux/<prod>/zcatalog
+        // layout is required by spectroRedux but not actually used by zcatalog,
+        // so we pass a canonical one (tiles is fine)
+        let zcatalogRoot = DESIEndpoint
+            .spectroRedux(
+                release: .dr1,
+                product: .iron,
+                layout: .tiles
+            )
+            .zCatalog()
+
+        let result = try await crawler.crawl(
+            from: zcatalogRoot,
+            options: TraversalOptions(
+                maxDepth: 2,
+                strategy: .depthFirst
+            ) { endpoint in
+                // Hard boundary: never leave zcatalog
+                endpoint.url.path.lowercased().contains("/zcatalog/")
+            }
+        )
+
+        let zcatalogFiles = result.files.filter { endpoint in
+            let name = endpoint.url.lastPathComponent.lowercased()
+            let base = name.replacingOccurrences(of: ".gz", with: "")
+
+            return
+                (base.hasPrefix("zall") && base.hasSuffix(".fits")) ||
+                (base.hasPrefix("zpix") && base.hasSuffix(".fits")) ||
+                (base.hasPrefix("ztile") && base.hasSuffix(".fits")) ||
+                (base.hasPrefix("zmtl") && base.hasSuffix(".fits"))   // optional
+        }
+
+        return zcatalogFiles
+    }
+
+
 }
