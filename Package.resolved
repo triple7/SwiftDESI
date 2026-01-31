@@ -1,5 +1,5 @@
 {
-  "originHash" : "2314516eab8438e3a59e07781898e24a577cd3d5c3b4d39ee4787e58983f3eef",
+  "originHash" : "f7ed6b02314849f003cce9f785ddf31cbe15465d1ebf89144606116931f46636",
   "pins" : [
     {
       "identity" : "fitscore",
@@ -26,6 +26,15 @@
       "state" : {
         "revision" : "6583ac70c326c3ee080c1d42d9ca3361dca816cd",
         "version" : "0.1.0"
+      }
+    },
+    {
+      "identity" : "swiftqvalue",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/triple7/SwiftQValue",
+      "state" : {
+        "branch" : "main",
+        "revision" : "c0973ee242bbe57dd9e7e0a91ceb36073c849e98"
       }
     }
   ],

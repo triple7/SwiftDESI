@@ -1,6 +1,43 @@
-
+import Foundation
+import FITS
+import FITSKit
+import SwiftQValue
 
 extension SwiftDESI {
+
+    private static func getFitsMetaData(fits: FitsFile) -> [String: QValue] {
+        print("getFitsMetaData: HDU count \(fits.HDUs.count)")
+        for hdu in fits.HDUs {
+            print("HDU: \n \(hdu.description)")
+            for header in hdu.headerUnit {
+                print("\(header.keyword): \(header.value)")
+            }
+        }
+        
+        // get the metadata from the hdu primary header unit
+        var metadata = [String:QValue]()
+        for hdu in fits.HDUs {
+            for unit in  hdu.headerUnit {
+                metadata[unit.keyword.rawValue] = QValue(value: (unit.value != nil) ? unit.value!.toString : "")
+            }
+        }
+        return metadata
+    }
+
+    public static func getFitsDataFromLocalFile(name: String) throws -> Data {
+        let documentsURL = try FileManager.default.url(
+            for: .documentDirectory,
+            in: .userDomainMask,
+            appropriateFor: nil,
+            create: false
+        )
+
+        let fileURL = documentsURL
+            .appendingPathComponent("DESI")
+            .appendingPathComponent(name)
+
+        return try Data(contentsOf: fileURL, options: .mappedIfSafe)
+    }
 
     
     public static func traverseDr1RelevantCatalogs() async throws -> [DESIEndpoint] {
@@ -109,5 +146,17 @@ extension SwiftDESI {
         return zcatalogFiles.filter{isPrimaryZCatalog($0)}
     }
 
+    public static func parseFitsFile(from name: String)  {
+        do {
+            let data = try SwiftDESI.getFitsDataFromLocalFile(name: name)
+            let fits = FitsFile.read( data)!
+            let metadata = getFitsMetaData(fits: fits)
+            for key in metadata.keys {
+                print("key: \(key)")
+            }
+        } catch let error {
+            print("Error: \(error.localizedDescription)")
+        }
+    }
 
 }

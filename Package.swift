@@ -16,6 +16,7 @@ let package = Package(
             targets: ["SwiftDESI"]),
     ],
     dependencies: [
+        .package(url: "https://github.com/triple7/SwiftQValue", branch: "main"),
         .package(url: "https://github.com/brampf/fitscore.git", branch: "master"),
             .package(url: "https://github.com/brampf/fitskit.git", branch: "master"),
     ],
@@ -25,6 +26,7 @@ let package = Package(
         .target(
             name: "SwiftDESI",
             dependencies: [
+                .product(name: "SwiftQValue", package: "SwiftQValue"),
                 .product(name: "FITSKit", package: "FITSKit"),
 ]),
         .testTarget(
