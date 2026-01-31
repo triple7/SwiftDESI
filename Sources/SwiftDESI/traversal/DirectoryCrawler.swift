@@ -52,7 +52,8 @@ public final class DirectoryCrawler {
             depth: Int,
             options: TraversalOptions,
             visited: inout Set<String>,
-            files: inout [DESIEndpoint]
+            files: inout [DESIEndpoint],
+            maxFiles: Int = 20
         ) async throws {
 
             guard depth <= options.maxDepth else { return }
@@ -63,6 +64,9 @@ public final class DirectoryCrawler {
 
             let scan = try await scanner.scan(endpoint: endpoint)
             files.append(contentsOf: scan.files)
+            if files.count > maxFiles {
+                return
+            }
 
             for directory in scan.directories {
                 guard options.shouldEnterDirectory(directory) else { continue }
