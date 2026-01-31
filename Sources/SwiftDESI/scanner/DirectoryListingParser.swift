@@ -44,6 +44,10 @@ public struct DirectoryListingParser {
         }
 
         print("Found \(entries.filter{$0.type == .directory}.count) directories")
+        for file in (entries.filter{$0.type == .directory}) {
+            print("file: \(file.name)")
+        }
+
         print("Found \(entries.filter{$0.type == .file}.count) files")
         for file in (entries.filter{$0.type == .file}) {
             print("file: \(file.name)")
