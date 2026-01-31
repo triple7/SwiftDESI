@@ -76,7 +76,7 @@ extension SwiftDESI {
         let result = try await crawler.crawl(
             from: zcatalogRoot,
             options: TraversalOptions(
-                maxDepth: 2,
+                maxDepth: 5,
                 strategy: .depthFirst
             ) { endpoint in
                 // Hard boundary: never leave zcatalog
