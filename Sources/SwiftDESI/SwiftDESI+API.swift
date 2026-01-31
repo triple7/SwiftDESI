@@ -65,13 +65,14 @@ extension SwiftDESI {
         // zcatalog lives under spectro/redux/<prod>/zcatalog
         // layout is required by spectroRedux but not actually used by zcatalog,
         // so we pass a canonical one (tiles is fine)
-        let zcatalogRoot = DESIEndpoint
-            .spectroRedux(
-                release: .dr1,
-                product: .iron,
-                layout: .tiles
-            )
-            .zCatalog()
+        let zcatalogRoot = DESIEndpoint(
+            DESIRelease.dr1.baseURL
+                .appendingPathComponent("spectro")
+                .appendingPathComponent("redux")
+                .appendingPathComponent("iron")
+                .appendingPathComponent("zcatalog")
+                .appendingPathComponent("v1")
+        )
 
         print("Trying: \(zcatalogRoot)")
         let result = try await crawler.crawl(
