@@ -43,7 +43,7 @@ public struct DirectoryListingParser {
             )
         }
 
-        print("Found \(entries.count)")
+        print("Found \(entries.count) entries")
         return entries
     }
 
