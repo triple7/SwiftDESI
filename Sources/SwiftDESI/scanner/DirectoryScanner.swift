@@ -17,7 +17,7 @@ public struct DirectoryScanner {
     public func scan(endpoint: DESIEndpoint) async throws -> DirectoryScanResult {
 
         // Throttle directory fetches to avoid NW timestamp overflow
-        try await Task.sleep(nanoseconds: 5_000_000_000)
+        try await Task.sleep(nanoseconds: 2_000_000_000)
 
         let html = try await fetcher.fetchHTML(from: endpoint.url)
         let entries = DirectoryListingParser.parse(html: html)
