@@ -24,7 +24,7 @@ extension SwiftDESI {
         return metadata
     }
 
-    public static func getFitsDataFromLocalFile(name: String) throws -> Data {
+    private static func getFitsDataFromLocalFile(name: String) throws -> Data {
         let documentsURL = try FileManager.default.url(
             for: .documentDirectory,
             in: .userDomainMask,
@@ -150,6 +150,7 @@ extension SwiftDESI {
     public static func parseFitsFile(from name: String)  {
         do {
             let data = try SwiftDESI.getFitsDataFromLocalFile(name: name)
+            print("Got data")
             let fits = FitsFile.read( data)!
             let metadata = getFitsMetaData(fits: fits)
             for key in metadata.keys {
