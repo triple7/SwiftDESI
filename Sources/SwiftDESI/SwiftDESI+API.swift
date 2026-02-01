@@ -36,6 +36,7 @@ extension SwiftDESI {
             .appendingPathComponent("DESI")
             .appendingPathComponent(name)
 
+        print(fileURL.absoluteString)
         return try Data(contentsOf: fileURL, options: .mappedIfSafe)
     }
 
