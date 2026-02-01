@@ -150,8 +150,11 @@ extension SwiftDESI {
     public static func parseFitsFile(from name: String)  {
         do {
             let data = try SwiftDESI.getFitsDataFromLocalFile(name: name)
-            print("Got data")
             let fits = FitsFile.read( data)!
+            print("Got fits")
+            for hdu in fits.HDUs {
+                print(hdu.description)
+            }
             let metadata = getFitsMetaData(fits: fits)
             for key in metadata.keys {
                 print("key: \(key)")
