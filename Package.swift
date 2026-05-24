@@ -17,8 +17,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/triple7/SwiftQValue", branch: "main"),
-        .package(url: "https://github.com/brampf/fitscore.git", branch: "master"),
-            .package(url: "https://github.com/brampf/fitskit.git", branch: "master"),
+        .package(url: "https://github.com/andreasjk/fitscore.git", exact: "0.3.2"),
+        .package(url: "https://github.com/ifeLight/fitskit.git", branch: "master"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
@@ -27,7 +27,8 @@ let package = Package(
             name: "SwiftDESI",
             dependencies: [
                 .product(name: "SwiftQValue", package: "SwiftQValue"),
-                .product(name: "FITSKit", package: "FITSKit"),
+                .product(name: "FITSCore", package: "fitscore"),
+                .product(name: "FITSKit", package: "fitskit"),
 ]),
         .testTarget(
             name: "SwiftDESITests",

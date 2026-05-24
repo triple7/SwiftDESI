@@ -1,22 +1,22 @@
 {
-  "originHash" : "f7ed6b02314849f003cce9f785ddf31cbe15465d1ebf89144606116931f46636",
+  "originHash" : "edf2bf5c239f02fee429213b0593f6aad72c61df1f14bd8756380a1ba626ab7a",
   "pins" : [
     {
       "identity" : "fitscore",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/brampf/fitscore.git",
+      "location" : "https://github.com/andreasjk/fitscore.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "93a1f0c7056a323b9f27cb618c83f64d458edb7b"
+        "revision" : "5419a16d2dfa945caaa95402650811ac7c8cb6fc",
+        "version" : "0.3.2"
       }
     },
     {
       "identity" : "fitskit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/brampf/fitskit.git",
+      "location" : "https://github.com/ifeLight/fitskit.git",
       "state" : {
         "branch" : "master",
-        "revision" : "0e4094ed8c45d094551c519d4e36d466ea900de6"
+        "revision" : "66f257f88adb69f9cef1605daa35987e29d52a13"
       }
     },
     {
